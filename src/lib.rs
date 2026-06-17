@@ -95,10 +95,32 @@ mod tests {
 
     #[test]
     fn empty() {
-        let input = "";
-        let expected = "";
-        let actual = without_ats(input);
-        assert_eq!(expected, actual);
+        assert_eq!(without_ats(""), "");
+    }
+
+    #[test]
+    fn beginning() {
+        assert_eq!(without_ats("@REMOVED@text"), "text");
+    }
+
+    #[test]
+    fn middle() {
+        assert_eq!(without_ats("hei@REMOVED@der"), "heider");
+    }
+
+    #[test]
+    fn ending() {
+        assert_eq!(without_ats("text@REMOVED@"), "text");
+    }
+
+    #[test]
+    fn two_conseq_empty() {
+        assert_eq!(without_ats("@REMOVED@@ALSO-REMOVED@"), "");
+    }
+
+    #[test]
+    fn middle_text() {
+        assert_eq!(without_ats("@REMOVED@heyhey@ALSO-REMOVED@"), "heyhey");
     }
 
     #[test]
